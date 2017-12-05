@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-def digitsum(array)
-  array = array.to_s.split('').map(&:to_i)
+def digitsum(sequence)
+  array = sequence.to_s.split('').map(&:to_i) # Returns an array of the given sequence.
   array2 = []
   
   if array[0] == array.last
