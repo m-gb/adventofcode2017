@@ -23,5 +23,5 @@ digitsum(1111) # 4
 digitsum(1234) # 0
 digitsum(91212129) # 9
 
-sequence = File.read('./day1.txt')
+sequence = File.read('./input.txt')
 digitsum(sequence) # 1049
