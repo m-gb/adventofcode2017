@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
 
 def checksum(input)
-  array = input.split("\n") # Returns an array of the given sequence based on newlines.
+  array = input.split("\n").map{ |row| row.split("\t").map(&:to_i)} # Returns an array of integer arrays.
   values = []
 
   array.each do |row|
-    array2 = row.split("\t").map(&:to_i) # Returns a new array of each row based on tabs.
-    difference = array2.max - array2.min
-    values << difference
+    values << row.minmax.reverse.reduce(:-)
   end
 
   sum = values.reduce(:+)
