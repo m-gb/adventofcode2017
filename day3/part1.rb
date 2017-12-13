@@ -2,14 +2,14 @@
 
 def spiral(input)
   root = Math.sqrt(input).ceil # Returns the rounded square root of input.
+  root += 1 if root.even? 
   upper_boundary = root ** 2 # Returns the square of root.
   boundary_steps = root - 1 # Returns the Manhattan Distance (steps) of the upper boundary.
   boundary_x = boundary_steps / 2 # Returns the x coordinate of the upper boundary.
-  boundary_y = -(boundary_steps / 2) # Returns the y coordinate of the upper boundary.
+  boundary_y = -(boundary_steps / 2) # Returns the y coordinate of the upper boundary. Boundary's y is always negative.
   bottom_left_corner = upper_boundary - boundary_steps
   top_left_corner = bottom_left_corner - boundary_steps
   top_right_corner = top_left_corner - boundary_steps
-  bottom_right_corner = top_right_corner - boundary_steps + 1
   
   case
   when input >= bottom_left_corner
@@ -24,11 +24,13 @@ def spiral(input)
     diff = top_left_corner - input
     input_x = diff - boundary_x
     input_y = boundary_y + boundary_steps
-  when input >= bottom_right_corner
+  when input < top_right_corner
+    top_right_y = -boundary_y # Compares to top_right_corner's y coordinate.
     diff = top_right_corner - input
     input_x = boundary_x # x is the same as boundary's.
-    input_y = diff + boundary_y
-  end 
+    input_y = top_right_y - diff 
+  end
+  puts input_x.abs + input_y.abs # Calculates the Manhattan Distance (steps).
 end
 
 spiral(1) # 0
@@ -36,4 +38,4 @@ spiral(12) # 3
 spiral(23) # 2
 spiral(1024) # 31
 # Puzzle input:
-spiral(312051) #
+spiral(312051) # 430
